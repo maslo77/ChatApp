@@ -1,5 +1,7 @@
 package com.company;
 
+
+
 import java.io.*;
 import java.net.Socket;
 
@@ -26,13 +28,19 @@ public class GetSerwer extends  Thread{
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String read;
         while((read = reader.readLine())!=null)
-        {
-            if("quit".equalsIgnoreCase(read))
-            {
-                break;
+        {   String[] token;
+            token = StringUtils.,`  ;
+            if(token !=null && token.length >0)
+            {   String user = token[0];
+                if("quit".equalsIgnoreCase(read))
+                {
+                    break;
+                }else {
+                    String Message = "Nie znaleziono użytkownika " +read + "\n";
+                    outputStream.write(Message.getBytes());
+                }
             }
-            String Message = read + "\n";
-            outputStream.write(Message.getBytes());
+
         }
         uzytkownik.close();
     }
