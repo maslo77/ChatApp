@@ -10,12 +10,15 @@ import java.util.List;
 public class Sesja extends  Thread{
     public final int portSerwera;
 
-    private ArrayList<GetSerwer> ListaK = new ArrayList<>();
+    private static ArrayList<ObslugaSerwera> ListaK = new ArrayList<>();
     public Sesja(int portSerwera)
     {
         this.portSerwera = portSerwera;
     }
-    public List<GetSerwer> getList(){
+
+
+
+    public List<ObslugaSerwera> getList(){
         return ListaK;
     }
 
@@ -27,7 +30,7 @@ public class Sesja extends  Thread{
                 Socket polaczenieKlienta = serwersocket.accept();
                 OutputStream wyjscie = polaczenieKlienta.getOutputStream();
                 wyjscie.write("TEST\n".getBytes());
-                GetSerwer nowy = new GetSerwer(this,polaczenieKlienta);
+                ObslugaSerwera nowy = new ObslugaSerwera(this,polaczenieKlienta);
                 ListaK.add(nowy);
                 nowy.start();
             }
@@ -35,4 +38,8 @@ public class Sesja extends  Thread{
             e.printStackTrace();
         }
     }
+    public static void usun(ObslugaSerwera getSerwer) {
+        ListaK.remove(getSerwer);
+    }
+
 }
